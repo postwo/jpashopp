@@ -6,4 +6,8 @@ update: 변경된 스키마 적용
 validate: 엔티티와 테이블 정상 매핑 확인
 
 
+ALT+INSERT = test코드 작성
+
+
+
 

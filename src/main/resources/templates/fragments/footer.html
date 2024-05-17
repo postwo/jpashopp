@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- 다른 페이지에 포함시킬 영역을 th:fragment로 선언해줍니다. \
+thymeleafEx.html에 작성된 내용은 default.html의 <div layout:fragment=”content”> 영역에 들어-->
+
+<!--<div th:fragment="footer">-->
+<!--    footer 영역입니다.-->
+<!--</div>-->
+
+
+
+<div th:fragment="footer">
+    <!-- Footer-->
+    <footer class="py-5 bg-dark">
+        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Jincrates 2022</p></div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="/js/scripts.js"></script>
+</div>
+</html>
