@@ -13,7 +13,7 @@ spring:
   # JPA 설정
   jpa:
     hibernate:
-      ddl-auto: create # 데이터베이스 초기화 전략
+      ddl-auto: update # 데이터베이스 초기화 전략
     properties:
       hibernate:
         show_sql: true # 실행되는 쿼리 콘솔 출력
