@@ -19,3 +19,11 @@ spring:
         show_sql: true # 실행되는 쿼리 콘솔 출력
         format_sql: true # 콘솔창에 출력되는 쿼리를 가동성이 좋게 포맷팅
     database-platform: org.hibernate.dialect.MySQL8Dialect
+
+
+---
+#spring:
+#  thymeleaf:
+#    prefix: classpath:/templates/
+#    suffix: .html
+#    cache: false
