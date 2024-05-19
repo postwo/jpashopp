@@ -30,6 +30,7 @@ public class MemberFormDto {
     @NotEmpty(message = "주소는 필수 입력 값입니다.")
     private String address;
 
+    //이렇게 하면 setter가 필요가 없다 그러므로 위에 전체적으로 거는 setter는 지워도 된다
     @Builder
     public MemberFormDto(String name, String email, String password, String address) {
         this.name = name;
