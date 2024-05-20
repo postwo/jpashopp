@@ -1,7 +1,9 @@
 package com.example.jpashopp.domain.orders;
 
 import com.example.jpashopp.domain.members.Member;
+import groovyjarjarantlr.collections.impl.BitSet;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -55,7 +57,12 @@ public class Order { //양항뱡 매핑이란 단방향 매핑이 2개 있다고
     DETACH	부모 엔티티가 detach 되면 연관된 자식 엔티티도 detach 상태로 변경
     ALL	부모 엔티티의 영속 상태 변화를 자신 엔티티에 모두 전이*/
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+
+    /*고아 객체 제거하기 = orphanRemoval = true
+    고아 객체란 부모 엔티티와 연관 관계가 끊어진 자식 엔티티를 말합니다. 영속성 전이 기능과 같이 사용하면 부모 엔티티를 통해서
+    자식의 생명 주기를 관리할 수 있습니다. 고아 객체 제거 기능은 참조하는 곳이 하나일 때만 사용해야 합니다. 다른 곳에서도 참조하고
+    있는 엔티티인데 삭제하면 문제가 생길 수 있기 때문*/
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems = new ArrayList<>();
 
 
@@ -63,4 +70,17 @@ public class Order { //양항뱡 매핑이란 단방향 매핑이 2개 있다고
 
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;    //주문상태
+
+
+
+    @Builder
+    public Order(Member member, LocalDateTime orderDate, List<OrderItem> orderItems, OrderStatus orderStatus) {
+        this.member = member;
+        this.orderDate = orderDate;
+        this.orderItems = orderItems != null ? orderItems : new ArrayList<>();
+        this.orderStatus = orderStatus;
+    }
+
+
+
 }
