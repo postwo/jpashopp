@@ -1,5 +1,6 @@
 package com.example.jpashopp.domain.cart;
 
+import com.example.jpashopp.domain.BaseEntity;
 import com.example.jpashopp.domain.items.Item;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -13,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "cart_item")
 @Entity
-public class CartItem {
+public class CartItem extends BaseEntity {
 
     /*하나의 장바구니에는 여러 개의 상품들이 들어갈 수 있습니다. 또한 같은 상품을 여러 개 주문할 수
      있으므로 몇 개 담아 줄 것인지도 설정해줘야 합

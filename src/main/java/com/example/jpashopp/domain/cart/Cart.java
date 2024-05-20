@@ -1,5 +1,6 @@
 package com.example.jpashopp.domain.cart;
 
+import com.example.jpashopp.domain.BaseEntity;
 import com.example.jpashopp.domain.members.Member;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "cart")
 @Entity
-public class Cart {
+public class Cart extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

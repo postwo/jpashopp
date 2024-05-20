@@ -1,5 +1,6 @@
 package com.example.jpashopp.domain.items;
 
+import com.example.jpashopp.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,7 +11,7 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Item {
+public class Item extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

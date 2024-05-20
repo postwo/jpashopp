@@ -1,5 +1,6 @@
 package com.example.jpashopp.domain.members;
 
+import com.example.jpashopp.domain.BaseEntity;
 import com.example.jpashopp.dto.MemberFormDto;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -12,10 +13,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @NoArgsConstructor
 @Getter
-@Setter
 @Table(name = "member")
 @Entity
-public class Member {
+public class Member extends BaseEntity {
 
     @jakarta.persistence.Id
     @Id

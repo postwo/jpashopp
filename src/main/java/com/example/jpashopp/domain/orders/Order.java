@@ -1,5 +1,6 @@
 package com.example.jpashopp.domain.orders;
 
+import com.example.jpashopp.domain.BaseEntity;
 import com.example.jpashopp.domain.members.Member;
 import groovyjarjarantlr.collections.impl.BitSet;
 import jakarta.persistence.*;
@@ -16,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "orders")
 @Entity
-public class Order { //양항뱡 매핑이란 단방향 매핑이 2개 있다고 생각하시면 됩니다. 주문과 주문 상품의 매핑을 양방향으로 설정
+public class Order extends BaseEntity { //양항뱡 매핑이란 단방향 매핑이 2개 있다고 생각하시면 됩니다. 주문과 주문 상품의 매핑을 양방향으로 설정
     @Id
     @GeneratedValue
     @Column(name = "order_id")
