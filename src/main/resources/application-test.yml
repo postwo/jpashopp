@@ -17,3 +17,17 @@ spring:
         show_sql: true
         format_sql: true
     database-platform: org.hibernate.dialect.H2Dialect
+
+
+  #이미지 파일을 등록할 때 서버에서 각 파일의 최대 사이즈와 한번에 다운 요청할 수 있는 파일의 크기를 지정할 수 있습니다.
+  #또한 PC에서 어떤 경로에 저장할지를 관리하기 위해서 yaml에 itemImgLocation을 추가하겠습니다. 리소스 업로드 경로도 추가
+  servlet:
+    multipart:
+      maxFileSize: 20MB
+      maxRequestSize: 100MB
+
+#itemImgLocation: /Users/jincrates/projects/upload/shop/item # C:/shop/item
+#uploadPath: file:///Users/jincrates/projects/upload/shop/  #file:///C:/shop/
+
+itemImgLocation: C:/shopping/item  # C:/shop/item
+uploadPath: file:///C:/shopping/  #file:///C:/
