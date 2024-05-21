@@ -56,7 +56,7 @@ public class ItemFormDto {
         return entity;
     }
 
-    public ItemFormDto of(Item entity) { //엔티티를 DTO로 변환하는 작업을 위해 만든 메소드
+    public static ItemFormDto of(Item entity) { //엔티티를 DTO로 변환하는 작업을 위해 만든 메소드
         ItemFormDto dto = ItemFormDto.builder()
                 .itemNm(entity.getItemNm())
                 .itemDetail(entity.getItemDetail())

@@ -1,6 +1,7 @@
 package com.example.jpashopp.domain.items;
 
 import com.example.jpashopp.domain.BaseEntity;
+import com.example.jpashopp.dto.ItemFormDto;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -41,5 +42,17 @@ public class Item extends BaseEntity {
         this.stockNumber =stockNumber;
         this.itemDetail = itemDetail;
         this.itemSellStatus = itemSellStatus;
+    }
+
+
+    /*엔티티 클래스에 비즈니스 로직을 추가한다면 조금 더 객체지향적으로 코딩을 할 수 있고,
+    코드를 재활용할 수 있습니다. 또한 데이터 변경 포인트를 한군데에서 관리할 수 있습니다.
+    * */
+    public void updateItem(ItemFormDto itemFormDto) {
+        this.itemNm = itemFormDto.getItemNm();
+        this.price = itemFormDto.getPrice();
+        this.stockNumber = itemFormDto.getStockNumber();
+        this.itemDetail = itemFormDto.getItemDetail();
+        this.itemSellStatus = itemFormDto.getItemSellStatus();
     }
 }
