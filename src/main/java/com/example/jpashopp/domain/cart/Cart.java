@@ -31,4 +31,14 @@ public class Cart extends BaseEntity {
     public Cart(Member member) {
         this.member = member;
     }
+
+
+    //회원 한 명당 1개의 장바구니를 갖으므로 Cart 클래스에 회원 엔티티를 파라미터로 받아서 장바구니 엔티티를 생성하는 로직을 추가
+    public static Cart createCart(Member member) {
+        Cart cart = Cart.builder()
+                .member(member)
+                .build();
+        return cart;
+    }
+
 }
