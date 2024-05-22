@@ -4,10 +4,13 @@ import com.example.jpashopp.domain.items.Item;
 import com.example.jpashopp.domain.items.ItemImg;
 import com.example.jpashopp.dto.ItemFormDto;
 import com.example.jpashopp.dto.ItemImgDto;
+import com.example.jpashopp.dto.ItemSearchDto;
 import com.example.jpashopp.repository.ItemImgRepository;
 import com.example.jpashopp.repository.ItemRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -77,6 +80,13 @@ public class ItemService {
         }
 
         return item.getId();
+    }
+
+
+    //ItemService 클래스에 상품 조회 조건과 페이지 정보를 파라미터로 받아서 상품 데이터를 조회하는 getAdminItemPage() 메소드를 추가
+    @Transactional(readOnly = true)
+    public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
+        return itemRepository.getAdminItemPage(itemSearchDto, pageable);
     }
 
 

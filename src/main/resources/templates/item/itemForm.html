@@ -53,6 +53,7 @@
             상품 등록
         </p>
 
+        <!-- 상품 수정시에는 id값이 있어야 한다 -->
         <input type="hidden" th:field="*{id}">
 
         <!-- 상품 주문이 많이 들어와서 재고가 없을 경우 주문시 품절 상태로 바꿔줄 것입니다.
@@ -116,9 +117,11 @@
             </div>
         </div>
 
+        <!-- #strings.isEmpty(itemFormDto.id)} di가 없는상태이면 저장 버튼을 보여준다-->
         <div th:if="${#strings.isEmpty(itemFormDto.id)}" style="text-align: center">
             <button th:formaction="@{/admin/item/new}" type="submit" class="btn btn-primary">저장</button>
         </div>
+        <!-- unless id가 채워진 경우이면 수정 버튼이 생성-->
         <div th:unless="${#strings.isEmpty(itemFormDto.id)}" style="text-align: center">
             <button th:formaction="@{'/admin/item/' + ${itemFormDto.id} }" type="submit" class="btn btn-primary">수정</button>
         </div>
