@@ -14,7 +14,7 @@
 
         $(document).ready(function(){
 
-            calculateTotalPrice(); //현재 주문할 수량과 상품 한 개당 가격을 곱하여 결제 금액을 구해주는 함수
+            calculateTotalPrice();
 
             $("#count").change(function() {
                 calculateTotalPrice();
@@ -28,35 +28,46 @@
             $("#totalPrice").html(totalPrice + '원');
 
         }
-    </script>
-</th:block>
 
-<!-- 사용자 CSS 추가 -->
-<th:block layout:fragment="css">
-    <style>
-        .mgb-15{
-            margin-bottom:15px;
+        function order() {
+            var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
+
+            var url = "/order";
+            var paramData = {
+                itemId : $("#itemId").val(),
+                count : $("#count").val()
+            };
+
+            var param = JSON.stringify(paramData);
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                contentType: "application/json",
+                data: param,
+                beforeSend: function(xhr) { /*beforeSend:스프링 시큐리티를 사용할 경우 기본적으로 POST 방식의 데이터 전송에는 CSRF 토큰 값이 필요하므로 해당 값들을 조회   */
+                    /* 데이터를 전송하기 전에 헤더에 csrf 값을 설정 */
+                    xhr.setRequestHeader(header, token);
+                },
+                dataType: "json",
+                cache: false,
+                success: function(result, status) { //주문 로직 호출이 성공하면 “주문이 완료되었습니다. ”라는 메시지를 보여주고 메인 페이지로 이동
+                    alert("주문이 완료 되었습니다.");
+                    location.href = '/';
+                },
+                error: function(jqXHR, status, error) { //현재 로그인 상태가 아니라면 “로그인 후 이용해주세요”라는 메시지를 보여주고 로그인 페이지로 이동
+
+                    if (jqXHR.status == '401') {
+                        alert('로그인 후 이용해주세요.');
+                        location.href = '/members/login';
+                    } else {
+                        alert(jqXHR.responseText);
+                    }
+                }
+            });
         }
-        .mgt-30{
-            margin-top:30px;
-        }
-        .mgt-50{
-            margin-top:50px;
-        }
-        .repImgDiv{
-            margin-right:15px;
-            height:auto;
-            width:50%;
-        }
-        .repImg{
-            width:100%;
-            height:400px;
-        }
-        .wd50{
-            height:auto;
-            width:50%;
-        }
-    </style>
+    </script>
 </th:block>
 
 <div layout:fragment="content">

@@ -84,4 +84,39 @@ public class Order extends BaseEntity { //양항뱡 매핑이란 단방향 매�
 
 
 
+
+
+    //생성한 주문 상품 객체를 이용하여 주문 객체를 만드는 메소드를 작성
+
+    public void addOrderItem(OrderItem orderItem) { //Order 엔티티와 OrderItem 엔티티가 양방향 참조 관계이므로, orderItem 객체에도 order 객체를 셋팅
+        orderItems.add(orderItem);
+        orderItem = OrderItem.builder()
+                .order(this)
+                .build();
+    }
+
+    public static Order createOrder(Member member, List<OrderItem> orderItemList) {
+        Order order = Order.builder()
+                .member(member)
+                .orderStatus(OrderStatus.ORDER)
+                .orderDate(LocalDateTime.now())
+                .build();
+
+        for (OrderItem orderItem : orderItemList) {
+            order.addOrderItem(orderItem);
+        }
+
+        return order;
+    }
+
+    public int getTotalPrice() {
+        int totalPrice = 0;
+        for (OrderItem orderItem : orderItems) {
+            totalPrice += orderItem.getTotalPrice();
+        }
+
+        return totalPrice;
+    }
+
+
 }

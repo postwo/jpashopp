@@ -2,6 +2,7 @@ package com.example.jpashopp.domain.items;
 
 import com.example.jpashopp.domain.BaseEntity;
 import com.example.jpashopp.dto.ItemFormDto;
+import com.example.jpashopp.exception.OutOfStockException;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -54,5 +55,14 @@ public class Item extends BaseEntity {
         this.stockNumber = itemFormDto.getStockNumber();
         this.itemDetail = itemFormDto.getItemDetail();
         this.itemSellStatus = itemFormDto.getItemSellStatus();
+    }
+
+
+    public void removeStock(int stockNumber) { //상품을 주문할 경우 상품의 재고를 감소시키는 로직을 작성
+        int restStock = this.stockNumber - stockNumber;
+        if (restStock < 0) {
+            throw new OutOfStockException("상품의 재고가 부족합니다.(현재 재고 수량: " + this.stockNumber + ")");
+        }
+        this.stockNumber = restStock;
     }
 }
