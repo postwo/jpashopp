@@ -76,6 +76,15 @@ public class ItemController {
         return "item/itemForm";
     }
 
+    @GetMapping(value = "/item/{itemId}") // 그냥 아이디값입력하면 들어가짐 html수정하기
+    public String itemDetails(@PathVariable("itemId") Long itemId, Model model) {
+
+        ItemFormDto itemFormDto = itemService.getItemDetail(itemId);
+        model.addAttribute("item", itemFormDto);
+
+        return "item/itemDetail";
+    }
+
     //수정
     @PostMapping(value = "/admin/item/{itemId}")
     public String itemUpdate(@Valid ItemFormDto itemFormDto, BindingResult bindingResult
@@ -114,6 +123,9 @@ public class ItemController {
 
         return "item/itemManage";
     }
+
+
+
 
 
 }

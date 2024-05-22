@@ -5,6 +5,7 @@ import com.example.jpashopp.domain.items.ItemImg;
 import com.example.jpashopp.dto.ItemFormDto;
 import com.example.jpashopp.dto.ItemImgDto;
 import com.example.jpashopp.dto.ItemSearchDto;
+import com.example.jpashopp.dto.MainItemDto;
 import com.example.jpashopp.repository.ItemImgRepository;
 import com.example.jpashopp.repository.ItemRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -87,6 +88,11 @@ public class ItemService {
     @Transactional(readOnly = true)
     public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
         return itemRepository.getAdminItemPage(itemSearchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
+        return itemRepository.getMainItemPage(itemSearchDto, pageable);
     }
 
 
