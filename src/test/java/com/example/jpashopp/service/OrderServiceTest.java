@@ -5,6 +5,7 @@ import com.example.jpashopp.domain.items.ItemSellStatus;
 import com.example.jpashopp.domain.members.Member;
 import com.example.jpashopp.domain.orders.Order;
 import com.example.jpashopp.domain.orders.OrderItem;
+import com.example.jpashopp.domain.orders.OrderStatus;
 import com.example.jpashopp.dto.OrderDto;
 import com.example.jpashopp.repository.ItemRepository;
 import com.example.jpashopp.repository.MemberRepository;
@@ -76,6 +77,28 @@ public class OrderServiceTest {
         int totalPrice = orderDto.getCount() * item.getPrice();
 
         assertEquals(totalPrice, order.getTotalPrice());
+    }
+
+
+    @Test
+    @DisplayName("주문 취소 테스트")
+    public void cancelOrder() {
+        Item item = saveItem();
+        Member member = saveMember();
+
+        OrderDto orderDto = OrderDto.builder()
+                .itemId(item.getId())
+                .count(10)
+                .build();
+
+        Long orderId = orderService.order(orderDto, member.getEmail());
+
+        Order order = orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
+
+        orderService.cancelOrder(orderId);
+
+        assertEquals(OrderStatus.CANCEL, order.getOrderStatus());
+        assertEquals(100, item.getStockNumber());
     }
 
 }

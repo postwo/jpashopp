@@ -62,4 +62,9 @@ public class OrderItem  extends BaseEntity { //주문 상품 엔티티와 주문
     public int getTotalPrice() { //주문 가격과 수량을 곱해서 해당 상품을 주문한 총 가격을 계산하는 메소드
         return orderPrice * count;
     }
+
+
+    public void cancel() {//주문을 취소할 경우 주문 수량 만큼 상품의 재고를 증가시키는 cancel 메소드를 구현
+        this.getItem().addStock(count);
+    }
 }

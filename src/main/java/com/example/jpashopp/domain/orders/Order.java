@@ -119,4 +119,18 @@ public class Order extends BaseEntity { //양항뱡 매핑이란 단방향 매�
     }
 
 
+    public void cancelOrder() {//Item 클래스에 주문 취소시 주문 수량을 상품의 재고에 더해주는 로직과 주문 상태를 취소 상태로 바꿔주는 메소드를 구현
+        this.orderStatus = OrderStatus.CANCEL;
+
+        for (OrderItem orderItem : orderItems) {
+            orderItem.cancel();
+        }
+    }
+
+
+
+
+
+
+
 }
